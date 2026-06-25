@@ -16,14 +16,14 @@ import {
   Volume2, 
   Search, 
   PhoneCall, 
-  Database, 
   Palette, 
   Share2, 
   Cpu,
   User,
   FolderGit2,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Smartphone
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
@@ -266,6 +266,31 @@ Make the design extremely premium. It should use a dark color scheme inspired by
     },
     {
       id: 'd2',
+      title: 'App Prototype Design',
+      tool: 'Google Stitch',
+      toolUrl: 'https://stitch.withgoogle.com/',
+      icon: <Smartphone className="w-4 h-4 text-amber-400" />,
+      isAgent: false,
+      desc: 'Generates a native mobile app prototype design and visual screens for your product.',
+      prompt: `Act as a senior mobile UI/UX designer. Draft a visual layout prompting instruction for Google Stitch to design a native mobile app for my startup "${f.name}".
+Startup Name: ${f.name}
+Domain: ${f.domain}
+Target Audience: ${f.targetAudience}
+Value Proposition: ${f.idea}
+Killer Feature: ${f.feature}
+Design Theme/Style: ${f.theme}
+
+Stitch Prompt:
+"A native mobile app for a startup named ${f.name} which is ${f.idea}.
+Target Audience: ${f.targetAudience}.
+Theme Preferences: ${f.theme}.
+Please design the following 3 mobile screens:
+1. Splash & Authentication: A clean splash screen with logo placeholder, and a simplified email sign-in / social onboarding flow.
+2. Main Activity Dashboard: A responsive dashboard featuring ${f.feature} as the primary CTA, displaying user activity statistics and modern navigation widgets.
+3. Interactive Settings & Profile: A user profile screen detailing account settings, visual theme selectors matching ${f.theme}, and a support button for ${f.cta}."`
+    },
+    {
+      id: 'd3',
       title: '5-Slide Pitch Deck',
       tool: 'z.ai (GLM 5.2) / Gamma',
       toolUrl: 'https://chat.z.ai',
@@ -288,7 +313,7 @@ Format it with clear slide titles, visual layout suggestions, and the exact spea
 Keep it punchy, remove all academic jargon, and make it fit the MCIC Makerspace entrepreneurial vibe.`
     },
     {
-      id: 'd3',
+      id: 'd4',
       title: 'Viral Marketing Promo & Video',
       tool: 'Higgsfield.ai',
       toolUrl: 'https://higgsfield.ai/supercomputer',
@@ -307,7 +332,7 @@ Generation Prompt:
 Also, detail the layout requirements for 3 viral carousels explaining the startup to ${f.targetAudience}.`
     },
     {
-      id: 'd4',
+      id: 'd5',
       title: 'AI Audio overview / Podcast Script',
       tool: 'NotebookLM',
       toolUrl: 'https://notebooklm.google',
@@ -321,7 +346,7 @@ Host A is a tech reviewer who is highly excited about the practical implementati
 The tone should be ${f.marketingVibe}, conversational, natural, with realistic filler words ("like", "right", "uh-huh"), and sound like a native NotebookLM Audio Overview. Mention founder ${f.founderName} as the visionary builder.`
     },
     {
-      id: 'd5',
+      id: 'd6',
       title: 'Market Analysis & Risk Audit',
       tool: 'Gemini Deep Research',
       toolUrl: 'https://gemini.google.com',
@@ -340,7 +365,7 @@ Provide a comprehensive, cited report containing:
 Output the analysis in clean Markdown.`
     },
     {
-      id: 'd6',
+      id: 'd7',
       title: 'AI Voice Receptionist/Concierge',
       tool: 'ElevenLabs / Vapi',
       toolUrl: 'https://elevenlabs.io',
@@ -355,28 +380,10 @@ If a customer calls or speaks with you, your goal is to explain how we help them
 
 Operating Guidelines:
 - Speak in clear, short, conversational sentences suitable for low-latency text-to-speech.
-- Be helpful and friendly, avoiding complex engineering jargon.
+- Be friendly and helpful, avoiding complex engineering jargon.
 - Explain "${f.feature}" simply.
 - If asked about pricing, present the "${f.revenueModel}" pricing model.
 - If asked an edge case question you cannot answer, capture their name and email so ${f.founderName} can reach out.`
-    },
-    {
-      id: 'd7',
-      title: 'Notion Team Workspace Outline',
-      tool: 'Notion AI',
-      toolUrl: 'https://notion.so',
-      icon: <Database className="w-4 h-4 text-amber-400" />,
-      isAgent: false,
-      desc: 'Generates a markdown skeleton to paste into Notion for tracking tasks, customers, and launches.',
-      prompt: `Generate a markdown-based Notion workspace outline for startup "${f.name}".
-Core Idea: ${f.idea}
-Founder: ${f.founderName}
-
-The workspace must outline three distinct database tables:
-1. A Product Backlog with columns: Task Name, Status (Backlog, In Progress, QA, Done), Priority (Low, Medium, High), and Owner (${f.founderName} / AI agent).
-2. A CRM table tracking early-stage outreach to ${f.targetAudience} with columns: Contact Name, Organization, Status (Leads, Contacted, Meeting Scheduled, Closed), and Notes.
-3. A Marketing Calendar with columns: Content Topic, Channel (LinkedIn, X, Email), Publish Date, and Target Vibe (${f.marketingVibe}).
-Include 3 sample data rows in each table, customized with relevant examples for our core idea.`
     },
     {
       id: 'd8',
@@ -410,7 +417,7 @@ Target Audience: ${f.targetAudience}
 Core Value Prop: ${f.idea}
 
 Write:
-- Post 1 (LinkedIn): A compelling, story-driven founder post sharing why "${f.founderName}" built "${f.name}". Highlight "${f.feature}", tag @UNSW Founders, and guide them to "${f.cta}".
+- Post 1 (LinkedIn): A story-driven founder post sharing why "${f.founderName}" built "${f.name}". Highlight "${f.feature}", tag @UNSW Founders, and guide them to "${f.cta}".
 - Post 2 (X / Twitter): A punchy, hook-driven tweet under 280 characters focusing on efficiency gains, utilizing emojis and active hashtags.
 - Post 3 (Instagram): Visual styling suggestions combined with copy highlighting the user experience and encouraging them to "${f.cta}".`
     },
