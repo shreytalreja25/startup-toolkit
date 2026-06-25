@@ -25,9 +25,11 @@ import {
   ChevronDown,
   ChevronUp
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import confetti from 'canvas-confetti';
 import avatarImg from './assets/avatar.jpg';
 
-// Custom high-quality SVG components to avoid lucide-react brand icon import issues
+// Custom SVG components for Github and Linkedin (bypasses lucide import issue)
 const GithubIcon = ({ className }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
@@ -42,7 +44,6 @@ const LinkedinIcon = ({ className }) => (
     <circle cx="4" cy="4" r="2" />
   </svg>
 );
-
 
 // Preset configurations for fast demonstration
 const presets = {
@@ -84,13 +85,19 @@ const presets = {
   }
 };
 
-// Shrey's Vibe-Coded Projects
+// Shrey's Vibe-Coded Projects (8 Projects to balance the grid perfectly)
 const shreysProjects = [
   {
     title: 'Smart Spectra',
     url: 'https://smart-spectra.vercel.app/',
     desc: 'AI-driven spectral analysis and interactive data visualization platform.',
     tech: 'React / ChartJS / Gemini API'
+  },
+  {
+    title: 'Gym OS',
+    url: 'https://gym-os-lime.vercel.app/',
+    desc: 'AI-Powered Workout Recommendations based on body metrics and fitness goals.',
+    tech: 'React / Gemini API / TailwindCSS'
   },
   {
     title: 'Fun Activity Suggestor',
@@ -154,6 +161,14 @@ function App() {
   const handleLoadPreset = (key) => {
     setForm(presets[key]);
     showToast(`Loaded ${presets[key].name} Preset!`);
+    
+    // Celebrate preset load with confetti!
+    confetti({
+      particleCount: 80,
+      spread: 60,
+      origin: { y: 0.8 },
+      colors: ['#FFC600', '#ffffff', '#18181b']
+    });
   };
 
   const handleReset = () => {
@@ -186,6 +201,23 @@ function App() {
     navigator.clipboard.writeText(text);
     setCopiedId(id);
     showToast('Prompt copied to clipboard!');
+    
+    // Trigger localized double confetti burst from bottom left and right!
+    confetti({
+      particleCount: 50,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0, y: 0.9 },
+      colors: ['#FFC600', '#ffffff']
+    });
+    confetti({
+      particleCount: 50,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1, y: 0.9 },
+      colors: ['#FFC600', '#ffffff']
+    });
+
     setTimeout(() => setCopiedId(null), 2000);
   };
 
@@ -203,10 +235,10 @@ function App() {
     cta: form.cta || '[Call to Action (CTA)]'
   };
 
-  // Github Repo URL
-  const gitRepoUrl = "https://github.com/shreytalreja25/startup-toolkit";
-  const linkedinUrl = "https://www.linkedin.com/in/shreytalreja25/";
+  // Vercel Deployment Link & LinkedIn/GitHub details
   const deploymentUrl = "https://startup-toolkit-unsw.vercel.app/";
+  const gitRepoUrl = "https://github.com/shreytalreja25/startup-toolkit";
+  const linkedinUrl = "https://www.linkedin.com/in/shreytalreja/";
   
   // QR code API link (using qrserver)
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(deploymentUrl)}`;
@@ -404,6 +436,57 @@ Execute all tasks autonomously, asking for clarification only if authentication 
     }
   ];
 
+  // Framer Motion Animation Variants for Deliverables entrance
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    show: { 
+      y: 0, 
+      opacity: 1, 
+      transition: { type: 'spring', stiffness: 120, damping: 14 } 
+    }
+  };
+
+  // Sidebar Tab Button helper
+  const TabButton = ({ tab, icon, label }) => {
+    const isActive = activeTab === tab;
+    return (
+      <button 
+        className={`tab-btn ${isActive ? 'active' : ''}`}
+        onClick={() => setActiveTab(tab)}
+        style={{ position: 'relative' }}
+      >
+        {isActive && (
+          <motion.div 
+            layoutId="activeTabBg"
+            className="tab-active-bg"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'var(--unsw-gold)',
+              borderRadius: '0.25rem',
+              zIndex: 0
+            }}
+            transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+          />
+        )}
+        <span style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: '0.4rem', color: isActive ? 'var(--text-dark)' : 'inherit' }}>
+          {icon}
+          {label}
+        </span>
+      </button>
+    );
+  };
+
   return (
     <div className="app-container">
       {/* Sidebar - Interview Strategy & Dashboard */}
@@ -415,34 +498,10 @@ Execute all tasks autonomously, asking for clarification only if authentication 
 
         {/* Tab Headers */}
         <div className="tabs-header">
-          <button 
-            className={`tab-btn ${activeTab === 'timeline' ? 'active' : ''}`}
-            onClick={() => setActiveTab('timeline')}
-            id="tab-btn-timeline"
-          >
-            <Rocket className="w-4 h-4" /> Timeline
-          </button>
-          <button 
-            className={`tab-btn ${activeTab === 'skepticism' ? 'active' : ''}`}
-            onClick={() => setActiveTab('skepticism')}
-            id="tab-btn-skepticism"
-          >
-            <HelpCircle className="w-4 h-4" /> Q&A Shield
-          </button>
-          <button 
-            className={`tab-btn ${activeTab === 'judgement' ? 'active' : ''}`}
-            onClick={() => setActiveTab('judgement')}
-            id="tab-btn-judgement"
-          >
-            <ShieldAlert className="w-4 h-4" /> Judgement
-          </button>
-          <button 
-            className={`tab-btn ${activeTab === 'localai' ? 'active' : ''}`}
-            onClick={() => setActiveTab('localai')}
-            id="tab-btn-localai"
-          >
-            <Terminal className="w-4 h-4" /> Local AI
-          </button>
+          <TabButton tab="timeline" icon={<Rocket className="w-4 h-4" />} label="Timeline" />
+          <TabButton tab="skepticism" icon={<HelpCircle className="w-4 h-4" />} label="Q&A Shield" />
+          <TabButton tab="judgement" icon={<ShieldAlert className="w-4 h-4" />} label="Judgement" />
+          <TabButton tab="localai" icon={<Terminal className="w-4 h-4" />} label="Local AI" />
         </div>
 
         {/* Tab Contents */}
@@ -648,62 +707,70 @@ Execute all tasks autonomously, asking for clarification only if authentication 
             <div className="portfolio-title-layout">
               <User className="w-5 h-5 text-amber-400" />
               <h2>Meet Shrey | <span>Practical AI Project Officer Candidate</span></h2>
-              <span className="portfolio-badge">7 Vibe-Coded Projects</span>
             </div>
             {isPortfolioExpanded ? <ChevronUp className="w-5 h-5 text-amber-400" /> : <ChevronDown className="w-5 h-5 text-amber-400" />}
           </button>
           
-          {isPortfolioExpanded && (
-            <div className="portfolio-body">
-              {/* Profile Card */}
-              <div className="profile-card">
-                <div className="avatar-wrapper">
-                  <img src={avatarImg} alt="Shrey Talreja" className="profile-avatar" />
-                </div>
-                <div className="profile-meta">
-                  <h3>Shrey Talreja <span>Practical AI Builder & Educator</span></h3>
-                  <p>
-                    Passionate software builder bridging high-level AI architectures with scrappy, rapid, and functional prototyping. 
-                    Committed to activating the UNSW student and startup ecosystem by demonstrating concrete, plain-language AI operations 
-                    that drive workflow speed, lower MVP barriers, and foster hands-on learning.
-                  </p>
-                  <div className="profile-socials">
-                    <a href={gitRepoUrl} target="_blank" rel="noreferrer" className="social-link">
-                      <GithubIcon className="w-4 h-4" /> GitHub Profile
-                    </a>
-                    <a href={linkedinUrl} target="_blank" rel="noreferrer" className="social-link">
-                      <LinkedinIcon className="w-4 h-4" /> LinkedIn Profile
-                    </a>
+          <AnimatePresence initial={false}>
+            {isPortfolioExpanded && (
+              <motion.div 
+                className="portfolio-body"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.25, ease: 'easeInOut' }}
+                style={{ overflow: 'hidden' }}
+              >
+                {/* Profile Card */}
+                <div className="profile-card">
+                  <div className="avatar-wrapper">
+                    <img src={avatarImg} alt="Shrey Talreja" className="profile-avatar" />
+                  </div>
+                  <div className="profile-meta">
+                    <h3>Shrey Talreja <span>Practical AI Builder & Educator</span></h3>
+                    <p>
+                      Passionate software builder bridging high-level AI architectures with scrappy, rapid, and functional prototyping. 
+                      Committed to activating the UNSW student and startup ecosystem by demonstrating concrete, plain-language AI operations 
+                      that drive workflow speed, lower MVP barriers, and foster hands-on learning.
+                    </p>
+                    <div className="profile-socials">
+                      <a href={gitRepoUrl} target="_blank" rel="noreferrer" className="social-link">
+                        <GithubIcon className="w-4 h-4" /> GitHub Profile
+                      </a>
+                      <a href={linkedinUrl} target="_blank" rel="noreferrer" className="social-link">
+                        <LinkedinIcon className="w-4 h-4" /> LinkedIn Profile
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Projects Grid */}
-              <div>
-                <h3 className="projects-grid-header"><FolderGit2 className="w-4 h-4 inline mr-1 text-amber-400" /> Showcasing Live AI & Full-Stack Projects</h3>
-                <div className="projects-grid">
-                  {shreysProjects.map((proj, idx) => (
-                    <a 
-                      href={proj.url} 
-                      target="_blank" 
-                      rel="noreferrer" 
-                      className="project-card" 
-                      key={idx}
-                    >
-                      <div className="project-card-header">
-                        <span className="project-title">
-                          {proj.title}
-                        </span>
-                        <ExternalLink className="w-4 h-4 text-muted" />
-                      </div>
-                      <p className="project-desc">{proj.desc}</p>
-                      <span className="project-tech">{proj.tech}</span>
-                    </a>
-                  ))}
+                {/* Projects Grid */}
+                <div>
+                  <h3 className="projects-grid-header"><FolderGit2 className="w-4 h-4 inline mr-1 text-amber-400" /> Showcasing Live AI & Full-Stack Projects</h3>
+                  <div className="projects-grid">
+                    {shreysProjects.map((proj, idx) => (
+                      <a 
+                        href={proj.url} 
+                        target="_blank" 
+                        rel="noreferrer" 
+                        className="project-card" 
+                        key={idx}
+                      >
+                        <div className="project-card-header">
+                          <span className="project-title">
+                            {proj.title}
+                          </span>
+                          <ExternalLink className="w-4 h-4 text-muted" />
+                        </div>
+                        <p className="project-desc">{proj.desc}</p>
+                        <span className="project-tech">{proj.tech}</span>
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </div>
-          )}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </section>
 
         {/* Requirements Input Form Panel */}
@@ -828,9 +895,21 @@ Execute all tasks autonomously, asking for clarification only if authentication 
         <section className="deliverables-section">
           <h2><Sparkles className="w-6 h-6 text-amber-400" /> Generated Startup Starter Kit (10 Deliverables)</h2>
           
-          <div style={{display: 'flex', flexDirection: 'column', gap: '1.75rem'}}>
+          {/* Framer Motion stagger container tied to the form name to trigger on changes */}
+          <motion.div 
+            style={{display: 'flex', flexDirection: 'column', gap: '1.75rem'}}
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+            key={form.name || 'empty'}
+          >
             {deliverables.map((item, idx) => (
-              <div className="deliverable-card" key={item.id}>
+              <motion.div 
+                className="deliverable-card" 
+                key={item.id}
+                variants={itemVariants}
+                layout
+              >
                 <div className="card-header">
                   <div className="card-badge-group">
                     <span className="deliverable-num">{idx + 1}</span>
@@ -873,9 +952,9 @@ Execute all tasks autonomously, asking for clarification only if authentication 
                     {item.prompt}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </section>
       </main>
 
