@@ -298,6 +298,7 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   gap: 2rem;
+  flex-shrink: 0;
 }
 
 @media (max-width: 768px) {
@@ -366,6 +367,7 @@ body {
   border-radius: 0.5rem;
   overflow: hidden;
   transition: var(--transition-smooth);
+  flex-shrink: 0; /* Prevents desktop flex layout from squeezing accordion height to 0 */
 }
 
 .portfolio-accordion.expanded {
@@ -591,6 +593,7 @@ body {
   padding: 2rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   transition: var(--transition-smooth);
+  flex-shrink: 0;
 }
 
 .form-panel:hover {
@@ -701,6 +704,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  flex-shrink: 0;
 }
 
 .deliverables-section h2 {

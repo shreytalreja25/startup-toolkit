@@ -453,36 +453,36 @@ Execute all tasks autonomously, asking for clarification only if authentication 
               <div className="timeline-step active">
                 <div className="timeline-time">0-1</div>
                 <div className="timeline-details">
-                  <h4>Hook & Volunteer</h4>
-                  <p>Open this app. Pitch: "Solo founding is a 10-minute exercise." Ask Shetal/Nina for a startup idea (or load preset).</p>
+                  <h4>The Hook & Ideation</h4>
+                  <p>A live demonstration shows how AI has simplified solo founding. A volunteer from the audience provides a raw startup idea to initiate the build process.</p>
                 </div>
               </div>
               <div className="timeline-step">
                 <div className="timeline-time">1-2</div>
                 <div className="timeline-details">
-                  <h4>Rapid Gathering</h4>
-                  <p>Type answers into the grid. Emphasize that AI prompt coordination bridges the gap to execution.</p>
+                  <h4>Requirement Alignment</h4>
+                  <p>The raw parameters (target audience, killer feature, theme preferences) are structured into a unified data system live on screen.</p>
                 </div>
               </div>
               <div className="timeline-step">
                 <div className="timeline-time">2-8</div>
                 <div className="timeline-details">
-                  <h4>The 10-Deliverable Demo</h4>
-                  <p>Run through deliverables card-by-card. Show how to prompt v0, z.ai, Higgsfield, and Gemini live.</p>
+                  <h4>10-Deliverable Generation</h4>
+                  <p>Prompts are deployed across various free AI tools to construct the landing page, slide deck, branding kit, marketing copy, and research audit in real-time.</p>
                 </div>
               </div>
               <div className="timeline-step">
                 <div className="timeline-time">8-9</div>
                 <div className="timeline-details">
-                  <h4>The Agent Integration</h4>
-                  <p>Show how scaling is done using AI browser agents like Manus AI to run day-to-day operations.</p>
+                  <h4>Scaled Agent Integration</h4>
+                  <p>The workflow transitions from individual static prompts to autonomous browser agents (like Manus AI) to automate daily operational tasks.</p>
                 </div>
               </div>
               <div className="timeline-step">
                 <div className="timeline-time">9-10</div>
                 <div className="timeline-details">
-                  <h4>AI Judgement Wrap-up</h4>
-                  <p>Debrief on risks (hallucinations, security, IP, costs) and establish human-in-the-loop validation.</p>
+                  <h4>AI Judgement & Ethics</h4>
+                  <p>A review of critical startup constraints is presented, highlighting hallucination mitigation, security protocols, API cost management, and human-in-the-loop validation.</p>
                 </div>
               </div>
             </div>
