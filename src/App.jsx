@@ -206,9 +206,10 @@ function App() {
   // Github Repo URL
   const gitRepoUrl = "https://github.com/shreytalreja25/startup-toolkit";
   const linkedinUrl = "https://www.linkedin.com/in/shreytalreja/";
+  const deploymentUrl = "https://startup-toolkit-unsw.vercel.app/";
   
   // QR code API link (using qrserver)
-  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(gitRepoUrl)}`;
+  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(deploymentUrl)}`;
 
   // 10 Deliverable Prompt Definitions
   const deliverables = [
