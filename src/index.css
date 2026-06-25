@@ -109,6 +109,7 @@ body {
     position: relative;
     border-right: none;
     border-bottom: 1px solid var(--border-zinc);
+    order: 2; /* presentar guides go to bottom on mobile */
   }
 }
 
@@ -287,6 +288,7 @@ body {
     height: auto;
     overflow-y: visible;
     padding: 2rem 1.5rem;
+    order: 1; /* actual presentation content at the top on mobile */
   }
 }
 

@@ -205,7 +205,7 @@ function App() {
 
   // Github Repo URL
   const gitRepoUrl = "https://github.com/shreytalreja25/startup-toolkit";
-  const linkedinUrl = "https://www.linkedin.com/in/shreytalreja/";
+  const linkedinUrl = "https://www.linkedin.com/in/shreytalreja25/";
   const deploymentUrl = "https://startup-toolkit-unsw.vercel.app/";
   
   // QR code API link (using qrserver)
