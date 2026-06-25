@@ -238,7 +238,8 @@ function App() {
   // Vercel Deployment Link & LinkedIn/GitHub details
   const deploymentUrl = "https://startup-toolkit-unsw.vercel.app/";
   const gitRepoUrl = "https://github.com/shreytalreja25/startup-toolkit";
-  const linkedinUrl = "https://www.linkedin.com/in/shreytalreja/";
+  const gitProfileUrl = "https://github.com/shreytalreja25";
+  const linkedinUrl = "https://www.linkedin.com/in/shreytalreja25";
   
   // QR code API link (using qrserver)
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(deploymentUrl)}`;
@@ -734,7 +735,7 @@ Execute all tasks autonomously, asking for clarification only if authentication 
                       that drive workflow speed, lower MVP barriers, and foster hands-on learning.
                     </p>
                     <div className="profile-socials">
-                      <a href={gitRepoUrl} target="_blank" rel="noreferrer" className="social-link">
+                      <a href={gitProfileUrl} target="_blank" rel="noreferrer" className="social-link">
                         <GithubIcon className="w-4 h-4" /> GitHub Profile
                       </a>
                       <a href={linkedinUrl} target="_blank" rel="noreferrer" className="social-link">
